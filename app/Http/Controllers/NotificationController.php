@@ -16,7 +16,6 @@ class NotificationController extends Controller
 
     public function markAsRead(Notification $notification)
     {
-        $this->authorize('update', $notification);
         $notification->markAsRead();
         return redirect()->back()->with('success', 'Notification marked as read!');
     }
@@ -29,7 +28,6 @@ class NotificationController extends Controller
 
     public function destroy(Notification $notification)
     {
-        $this->authorize('delete', $notification);
         $notification->delete();
         return redirect()->back()->with('success', 'Notification deleted!');
     }
