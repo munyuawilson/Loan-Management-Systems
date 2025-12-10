@@ -75,32 +75,56 @@
             </a>
         </div>
         
-        <!-- Reports -->
-        <div class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }} rounded-lg">
-            <a href="{{ route('reports.index') }}" class="flex items-center px-3 py-3 text-gray-700 hover:text-red-600 transition-colors">
-                <i class="fas fa-chart-bar mr-3 text-gray-400 w-5 text-center"></i>
-                <span class="font-medium">Reports</span>
-            </a>
+        <!-- In your sidebar (partials/sidebar.blade.php) update the Reports section -->
+<!-- Reports -->
+<div class="nav-item {{ request()->routeIs('reports.*') ? 'active' : '' }} rounded-lg" x-data="{ open: false }">
+    <button @click="open = !open" class="flex items-center justify-between w-full px-3 py-3 text-gray-700 hover:text-red-600 transition-colors">
+        <div class="flex items-center">
+            <i class="fas fa-chart-bar mr-3 text-gray-400 w-5 text-center"></i>
+            <span class="font-medium">Reports</span>
         </div>
-        
+        <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
+    </button>
+    
+    <!-- Dropdown Menu -->
+    <div x-show="open" @click.away="open = false" class="mt-2 ml-8 space-y-1">
+        <a href="{{ route('reports.daily-collections') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-calendar-day mr-2 text-xs"></i>
+            Daily Collections
+        </a>
+        <a href="{{ route('reports.customer-statement') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-user-tag mr-2 text-xs"></i>
+            Customer Statement
+        </a>
+        <a href="{{ route('reports.running-loans') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-running mr-2 text-xs"></i>
+            Running Loans
+        </a>
+        <a href="{{ route('reports.ageing-analysis') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-hourglass-half mr-2 text-xs"></i>
+            Ageing Analysis
+        </a>
+        <a href="{{ route('reports.payment-trends') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-chart-line mr-2 text-xs"></i>
+            Payment Trends
+        </a>
+        <a href="{{ route('reports.loan-portfolio') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-gray-100 rounded-lg transition-colors">
+            <i class="fas fa-chart-pie mr-2 text-xs"></i>
+            Loan Portfolio
+        </a>
+    </div>
+</div>
         <!-- Divider -->
         <div class="border-t border-gray-200 my-4"></div>
         
-        <!-- Settings -->
-        <div class="nav-item {{ request()->routeIs('shop.settings') ? 'active' : '' }} rounded-lg">
-            <a href="{{ route('shop.settings') }}" class="flex items-center px-3 py-3 text-gray-700 hover:text-red-600 transition-colors">
-                <i class="fas fa-cog mr-3 text-gray-400 w-5 text-center"></i>
-                <span class="font-medium">Settings</span>
-            </a>
-        </div>
         
-        <!-- Help & Support -->
-        <div class="nav-item rounded-lg">
-            <a href="#" class="flex items-center px-3 py-3 text-gray-700 hover:text-red-600 transition-colors">
-                <i class="fas fa-question-circle mr-3 text-gray-400 w-5 text-center"></i>
-                <span class="font-medium">Help & Support</span>
-            </a>
-        </div>
+        
+       <div class="nav-item {{ request()->routeIs('help-support') ? 'active' : '' }} rounded-lg">
+    <a href="{{ route('help-support') }}" class="flex items-center px-3 py-3 text-gray-700 hover:text-red-600 transition-colors">
+        <i class="fas fa-question-circle mr-3 text-gray-400 w-5 text-center"></i>
+        <span class="font-medium">Help & Support</span>
+    </a>
+</div>
     </nav>
     
     <!-- Quick Stats Footer -->

@@ -9,6 +9,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\HelpSupportController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -81,16 +82,28 @@ Route::get('/loans/{loan}', [LoanController::class, 'show'])->name('loans.show')
     Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 
     // Reports
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
-    Route::get('/reports/loans', [ReportController::class, 'loans'])->name('reports.loans');
-    Route::get('/reports/payments', [ReportController::class, 'payments'])->name('reports.payments');
-    Route::get('/reports/customers', [ReportController::class, 'customers'])->name('reports.customers');
-    Route::post('/reports/export', [ReportController::class, 'export'])->name('reports.export');
 
+    Route::prefix('reports')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])->name('reports.index');
+        Route::get('/daily-collections', [ReportController::class, 'dailyCollections'])->name('reports.daily-collections');
+        Route::get('/customer-statement', [ReportController::class, 'customerStatement'])->name('reports.customer-statement');
+        Route::get('/running-loans', [ReportController::class, 'runningLoans'])->name('reports.running-loans');
+        Route::get('/ageing-analysis', [ReportController::class, 'ageingAnalysis'])->name('reports.ageing-analysis');
+        Route::get('/payment-trends', [ReportController::class, 'paymentTrends'])->name('reports.payment-trends');
+        Route::get('/loan-portfolio', [ReportController::class, 'loanPortfolio'])->name('reports.loan-portfolio');
+    });
+Route::get('/help-support', [HelpSupportController::class, 'index'])->name('help-support');
+Route::post('/help-support/ticket', [HelpSupportController::class, 'submitTicket'])->name('help-support.ticket');
     // Profile Routes (from Breeze)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::put('/profile/shop', [ProfileController::class, 'updateShop'])->name('profile.shop.update');
+  Route::put('/profile/shop', [ProfileController::class, 'updateShop'])->name('profile.shop.update');
+    Route::delete('/profile/photo', [ProfileController::class, 'deleteProfilePhoto'])->name('profile.photo.delete');
+    Route::delete('/profile/shop-logo', [ProfileController::class, 'deleteShopLogo'])->name('profile.shop-logo.delete');
+
+
 });
 
 // Customer Routes (protected)

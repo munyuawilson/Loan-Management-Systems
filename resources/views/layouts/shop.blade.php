@@ -289,22 +289,30 @@
             });
         });
 
-        // Auto-hide flash messages after 5 seconds
-        document.addEventListener('DOMContentLoaded', function() {
-            const flashMessages = document.querySelectorAll('[class*="bg-"] .fa-check-circle, [class*="bg-"] .fa-exclamation-circle');
-            
-            flashMessages.forEach(message => {
-                const flashContainer = message.closest('[class*="bg-"]');
-                if (flashContainer) {
-                    setTimeout(() => {
-                        flashContainer.style.transition = 'all 0.3s ease';
-                        flashContainer.style.opacity = '0';
-                        flashContainer.style.transform = 'translateY(-10px)';
-                        setTimeout(() => flashContainer.remove(), 300);
-                    }, 5000);
-                }
-            });
-        });
+        // Auto-hide flash messages after 5 seconds (FIXED)
+document.addEventListener('DOMContentLoaded', function() {
+    // Only target the specific flash message containers
+    const flashContainers = document.querySelectorAll('.mx-6.mt-6 [class*="bg-"]');
+    
+    flashContainers.forEach(container => {
+        // Only hide if it's a flash message (has check or exclamation icon)
+        const hasIcon = container.querySelector('.fa-check-circle, .fa-exclamation-circle');
+        const isInFlashLocation = container.closest('.mx-6.mt-6');
+        
+        if (hasIcon && isInFlashLocation) {
+            setTimeout(() => {
+                container.style.transition = 'all 0.3s ease';
+                container.style.opacity = '0';
+                container.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    if (container.parentNode) {
+                        container.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+    });
+});
     </script>
     
     @stack('scripts')
