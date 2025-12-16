@@ -197,7 +197,7 @@
                 <div class="fade-in">
                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-700 text-sm font-medium mb-6">
                         <span class="w-2 h-2 bg-red-600 rounded-full mr-2"></span>
-                        Trusted by 500+ Shop Owners in Kenya
+                        Trusted by 520+ Shop Owners in Kenya
                     </div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                         Simple Loan Management for 
@@ -288,7 +288,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
                 <div class="fade-in">
-                    <div class="stat-number">500+</div>
+                    <div class="stat-number">520+</div>
                     <p class="text-gray-600 font-medium text-sm sm:text-base">Shop Owners</p>
                 </div>
                 <div class="fade-in">
@@ -727,5 +727,42 @@
             });
         });
     </script>
+    <script>
+                var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?61220';
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = url;
+                var options = {
+                "enabled":true,
+                "chatButtonSetting":{
+                    "backgroundColor":"#00e785",
+                    "ctaText":"Chat with us",
+                    "borderRadius":"25",
+                    "marginLeft": "0",
+                    "marginRight": "20",
+                    "marginBottom": "20",
+                    "ctaIconWATI":false,
+                    "position":"right"
+                },
+                "brandSetting":{
+                    "brandName":"Wati",
+                    "brandSubTitle":"undefined",
+                    "brandImg":"https://www.wati.io/wp-content/uploads/2023/04/Wati-logo.svg",
+                    "welcomeText":"Hi there!\nHow can I help you?",
+                    "messageText":"",
+                    "backgroundColor":"#00e785",
+                    "ctaText":"Chat with us",
+                    "borderRadius":"25",
+                    "autoShow":false,
+                    "phoneNumber":"254711410353"
+                }
+                };
+                s.onload = function() {
+                    CreateWhatsappChatWidget(options);
+                };
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            </script>
 </body>
 </html>
